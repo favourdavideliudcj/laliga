@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1020" />
+  <title>LaLiga Central | Matchday Hub</title>
+  <style>
+    :root {
+      --bg: #0d1020;
+      --bg-alt: #121a2c;
+      --panel: rgba(19, 24, 38, 0.94);
+      --panel-2: rgba(25, 32, 49, 0.9);
+      --panel-3: rgba(15, 19, 31, 0.8);
+      --text: #edf3ff;
+      --muted: #9ea8c2;
+      --line: rgba(255, 255, 255, 0.08);
+      --pink: #ff4e9a;
+      --purple: #7b5cff;
+      --gold: #f7cf5a;
+      --green: #59e3a6;
+      --red: #ff6a76;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(123, 92, 255, 0.22), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(255, 78, 154, 0.14), transparent 27%),
+        linear-gradient(135deg, var(--bg), var(--bg-alt));
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    input, select, button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(13, 16, 32, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 12px 26px rgba(123, 92, 255, 0.3);
+      font-size: 1.2rem;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font-weight: 800;
+      padding: 11px 17px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 18px 30px rgba(123, 92, 255, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 68px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 42px 34px;
+      min-height: 410px;
+      background:
+        radial-gradient(circle at 75% 25%, rgba(247, 207, 90, 0.18), transparent 25%),
+        radial-gradient(circle at 40% 30%, rgba(255, 78, 154, 0.18), transparent 30%),
+        linear-gradient(135deg, rgba(255, 78, 154, 0.12), rgba(123, 92, 255, 0.12)),
+        var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main::after {
+      content: "⚽";
+      position: absolute;
+      right: 5%;
+      top: 10%;
+      font-size: clamp(140px, 16vw, 240px);
+      opacity: 0.08;
+      transform: rotate(-18deg);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      max-width: 600px;
+    }
+
+    .hero-copy p {
+      max-width: 560px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 30px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .featured-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .mini-label {
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .fixture-box {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 8px 6px;
+    }
+
+    .club {
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .club-badge {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      margin: 0 auto 10px;
+      font-size: 1.5rem;
+    }
+
+    .match-score {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+    }
+
+    .match-meta {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      text-align: center;
+    }
+
+    .live-pill {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    section {
+      padding: 20px 0 10px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2vw, 2.4rem);
+      letter-spacing: -0.05em;
+    }
+
+    .subline {
+      color: var(--muted);
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 22px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .table-panel {
+      padding: 18px 16px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 440px;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      text-align: left;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    td:first-child, th:first-child {
+      width: 42px;
+    }
+
+    td:nth-child(3), th:nth-child(3),
+    td:nth-child(4), th:nth-child(4),
+    td:nth-child(5), th:nth-child(5) {
+      text-align: center;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .team-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    .team-badge {
+      display: inline-flex;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .top-three {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .rank {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .fixture-panel {
+      padding: 18px;
+    }
+
+    .fixture-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .fixture-item {
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .fixture-teams {
+      font-weight: 700;
+    }
+
+    .fixture-date {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 2px;
+    }
+
+    .fixture-time {
+      color: var(--gold);
+      font-weight: 800;
+      white-space: nowrap;
+      font-size: 0.85rem;
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    .search-input {
+      width: min(280px, 40vw);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: rgba(123,92,255,0.8);
+      box-shadow: 0 0 0 3px rgba(123,92,255,0.15);
+    }
+
+    .teams-panel {
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .team-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      font-weight: 700;
+      min-height: 74px;
+    }
+
+    .team-emoji {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      font-size: 1.25rem;
+    }
+
+    .player-panel {
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .player-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 12px;
+    }
+
+    .player-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(255,78,154,0.18), rgba(123,92,255,0.18));
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+
+    .player-name {
+      font-weight: 800;
+      font-size: 0.96rem;
+    }
+
+    .player-meta {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 4px;
+    }
+
+    .player-stat {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: 0.78rem;
+    }
+
+    .player-stat strong {
+      color: var(--text);
+    }
+
+    .notice {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 24px 0 52px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .player-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .player-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .search-row {
+        justify-content: flex-start;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .hero-main {
+        padding: 28px 18px;
+      }
+
+      .team-grid,
+      .player-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fixture-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="brand" aria-label="LaLiga Central home">
+          <span class="brand-mark">⚽</span>
+          <span>
+            LALIGA
+            <small>CENTRAL</small>
+          </span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#standings">Standings</a>
+          <a href="#fixtures">Fixtures</a>
+          <a href="#teams">Teams</a>
+          <a href="#players">Top 30</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="#players" class="btn btn-secondary">See players</a>
+          <a href="#fixtures" class="btn btn-primary">Matchday hub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="hero-main">
+          <div class="hero-copy">
+            <span class="eyebrow">The home of Spanish football</span>
+            <h1>Every match.<br>Every moment.</h1>
+            <p>
+              Follow LaLiga action across standings, fixtures, match details, and the players lighting up the league.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#standings" class="btn btn-primary">Explore league</a>
+              <a href="#players" class="btn btn-secondary">Top 30 players</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <strong>20</strong>
+                <span>Teams</span>
+              </div>
+              <div class="stat">
+                <strong>38</strong>
+                <span>Rounds</span>
+              </div>
+              <div class="stat">
+                <strong>30</strong>
+                <span>Top players</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="featured-card">
+          <div class="mini-label">Featured match</div>
+
+          <div class="fixture-box">
+            <div class="club">
+              <div class="club-badge">🔴</div>
+              Barcelona
+            </div>
+
+            <div class="match-score">2 - 1</div>
+
+            <div class="club">
+              <div class="club-badge">⚪</div>
+              Real Madrid
+            </div>
+          </div>
+
+          <div class="match-meta">
+            <span class="live-pill">● FINAL</span> · Demo score for the website
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="standings">
+      <div class="section-head">
+        <div>
+          <h2>League table</h2>
+          <p class="subline">Standings for the current LaLiga season</p>
+        </div>
+
+        <div class="search-row">
+          <input id="teamFilter" type="search" class="search-input" placeholder="Search team..." aria-label="Search team"/>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="panel table-panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Club</th>
+                  <th>MP</th>
+                  <th>GD</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+              <tbody id="standingsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside id="fixtures" class="panel fixture-panel">
+          <div class="mini-label">Next fixtures</div>
+          <div class="fixture-list" id="fixturesList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="teams">
+      <div class="section-head">
+        <div>
+          <h2>Clubs</h2>
+          <p class="subline">Browse the teams across the league</p>
+        </div>
+      </div>
+
+      <div class="panel teams-panel">
+        <div class="team-grid" id="teamGrid"></div>
+      </div>
+    </section>
+
+    <section id="players">
+      <div class="section-head">
+        <div>
+          <h2>Top 30 players</h2>
+          <p class="subline">The biggest names shaping the season</p>
+        </div>
+
+        <div class="search-row">
+          <input id="playerSearch" type="search" class="search-input" placeholder="Search player..." aria-label="Search player"/>
+        </div>
+      </div>
+
+      <div class="panel player-panel">
+        <div class="player-grid" id="playerGrid"></div>
+        <div class="notice">Live player data requires a premium football API key. This version uses a curated demo list for a complete working UI.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      LaLiga Central · Unofficial fan-made concept · Demo data and API-backed standings
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = "https://www.thesportsdb.com/api/v1/json/3";
+    const LEAGUE_ID = 4335;
+
+    const standingsBody = document.getElementById("standingsBody");
+    const fixturesList = document.getElementById("fixturesList");
+    const teamGrid = document.getElementById("teamGrid");
+    const playerGrid = document.getElementById("playerGrid");
+    const teamFilter = document.getElementById("teamFilter");
+    const playerSearch = document.getElementById("playerSearch");
+
+    const fallbackStandings = [
+      { name: "Barcelona", icon: "🔴", mp: 10, gd: 18, pts: 25 },
+      { name: "Real Madrid", icon: "⚪", mp: 10, gd: 14, pts: 24 },
+      { name: "Atlético Madrid", icon: "🔴", mp: 10, gd: 11, pts: 22 },
+      { name: "Girona", icon: "🔴", mp: 10, gd: 8, pts: 20 },
+      { name: "Real Sociedad", icon: "🔵", mp: 10, gd: 6, pts: 18 },
+      { name: "Athletic Club", icon: "⚪", mp: 10, gd: 5, pts: 17 },
+      { name: "Sevilla", icon: "⚪", mp: 10, gd: 0, pts: 16 },
+      { name: "Valencia", icon: "🦇", mp: 10, gd: -2, pts: 15 },
+      { name: "Villarreal", icon: "🟡", mp: 10, gd: -1, pts: 15 },
+      { name: "Real Betis", icon: "🟢", mp: 10, gd: -3, pts: 14 },
+      { name: "Getafe", icon: "🔵", mp: 10, gd: -6, pts: 12 },
+      { name: "Osasuna", icon: "🔴", mp: 10, gd: -7, pts: 12 }
+    ];
+
+    const fallbackTeams = [
+      ["Barcelona", "🔴"],
+      ["Real Madrid", "⚪"],
+      ["Atlético Madrid", "🔴"],
+      ["Girona", "🔴"],
+      ["Real Sociedad", "🔵"],
+      ["Athletic Club", "⚪"],
+      ["Sevilla", "⚪"],
+      ["Valencia", "🦇"],
+      ["Villarreal", "🟡"],
+      ["Real Betis", "🟢"],
+      ["Getafe", "🔵"],
+      ["Osasuna", "🔴"],
+      ["Celta Vigo", "🔵"],
+      ["Mallorca", "🔵"],
+      ["Las Palmas", "🟡"],
+      ["Espanyol", "🔵"],
+      ["Rayo Vallecano", "🔴"],
+      ["Leganés", "🟡"]
+    ];
+
+    const demoPlayers = [
+      { name: "Vinícius Júnior", club: "Real Madrid", pos: "FW", goals: 15, assists: 9, rating: 8.9, emoji: "⚽" },
+      { name: "Kylian Mbappé", club: "Real Madrid", pos: "FW", goals: 17, assists: 8, rating: 9.1, emoji: "⚡" },
+      { name: "Robert Lewandowski", club: "Barcelona", pos: "FW", goals: 14, assists: 5, rating: 8.8, emoji: "🎯" },
+      { name: "Lamine Yamal", club: "Barcelona", pos: "FW", goals: 8, assists: 10, rating: 8.7, emoji: "🚀" },
+      { name: "Antoine Griezmann", club: "Atlético Madrid", pos: "FW", goals: 12, assists: 7, rating: 8.5, emoji: "🔥" },
+      { name: "Jude Bellingham", club: "Real Madrid", pos: "MF", goals: 11, assists: 9, rating: 8.8, emoji: "🧠" },
+      { name: "Pedri", club: "Barcelona", pos: "MF", goals: 4, assists: 9, rating: 8.6, emoji: "🎼" },
+      { name: "Rodri", club: "Manchester City", pos: "MF", goals: 6, assists: 7, rating: 8.7, emoji: "🛡️" },
+      { name: "Alvaro Morata", club: "Atlético Madrid", pos: "FW", goals: 12, assists: 4, rating: 8.3, emoji: "⚙️" },
+      { name: "Mikel Merino", club: "Real Sociedad", pos: "MF", goals: 9, assists: 5, rating: 8.2, emoji: "🩺" },
+      { name: "Gavi", club: "Barcelona", pos: "MF", goals: 3, assists: 6, rating: 8.0, emoji: "⚙️" },
+      { name: "Raphinha", club: "Barcelona", pos: "FW", goals: 10, assists: 8, rating: 8.4, emoji: "🎯" },
+      { name: "Federico Valverde", club: "Real Madrid", pos: "MF", goals: 7, assists: 9, rating: 8.5, emoji: "💪" },
+      { name: "Pedrinho", club: "Girona", pos: "FW", goals: 7, assists: 4, rating: 8.0, emoji: "🌟" },
+      { name: "Takefusa Kubo", club: "Real Sociedad", pos: "FW", goals: 8, assists: 6, rating: 8.1, emoji: "🕺" },
+      { name: "Aitor Ruibal", club: "Real Betis", pos: "MF", goals: 4, assists: 7, rating: 7.9, emoji: "🏃" },
+      { name: "Samuel Lino", club: "Celta Vigo", pos: "FW", goals: 7, assists: 4, rating: 7.8, emoji: "🚀" },
+      { name: "Mauro Arambarri", club: "Getafe", pos: "MF", goals: 6, assists: 3, rating: 7.8, emoji: "🧱" },
+      { name: "Alex Baena", club: "Villarreal", pos: "MF", goals: 6, assists: 7, rating: 8.1, emoji: "🎯" },
+      { name: "Brais Méndez", club: "Real Sociedad", pos: "MF", goals: 7, assists: 6, rating: 8.0, emoji: "🧩" },
+      { name: "Iñaki Williams", club: "Athletic Club", pos: "FW", goals: 10, assists: 5, rating: 8.2, emoji: "⚡" },
+      { name: "Mikel Oyarzabal", club: "Real Sociedad", pos: "FW", goals: 9, assists: 7, rating: 8.4, emoji: "💥" },
+      { name: "Sávio", club: "Girona", pos: "FW", goals: 9, assists: 5, rating: 8.1, emoji: "⚡" },
+      { name: "Joao Cancelo", club: "Barcelona", pos: "DF", goals: 2, assists: 6, rating: 8.2, emoji: "🛡️" },
+      { name: "Rúben Dias", club: "Manchester City", pos: "DF", goals: 3, assists: 2, rating: 8.4, emoji: "🧱" },
+      { name: "Lucas Ocampos", club: "Sevilla", pos: "FW", goals: 8, assists: 6, rating: 8.0, emoji: "🌪️" },
+      { name: "Andoni Gorosabel", club: "Real Sociedad", pos: "DF", goals: 2, assists: 4, rating: 7.8, emoji: "🛡️" },
+      { name: "Nico Paz", club: "Real Betis", pos: "MF", goals: 5, assists: 5, rating: 7.9, emoji: "🧠" },
+      { name: "Lautaro Martínez", club: "Inter", pos: "FW", goals: 11, assists: 4, rating: 8.6, emoji: "🎯" },
+      { name: "Erling Haaland", club: "Manchester City", pos: "FW", goals: 16, assists: 5, rating: 9.2, emoji: "💣" }
+    ];
+
+    let allTeams = fallbackTeams;
+
+    function renderStandings(data) {
+      standingsBody.innerHTML = data.map((team, index) => `
+        <tr>
+          <td class="rank ${index < 3 ? "top-three" : ""}">${index + 1}</td>
+          <td>
+            <div class="team-name">
+              <span class="team-badge">${team.icon || "⚽"}</span>
+              <span>${team.name}</span>
+            </div>
+          </td>
+          <td>${team.mp}</td>
+          <td>${team.gd > 0 ? "+" : ""}${team.gd}</td>
+          <td><strong>${team.pts}</strong></td>
+        </tr>
+      `).join("");
+    }
+
+    function renderFixtures(data) {
+      fixturesList.innerHTML = data.map(fixture => `
+        <div class="fixture-item">
+          <div>
+            <div class="fixture-teams">${fixture.home} vs ${fixture.away}</div>
+            <div class="fixture-date">${fixture.date}</div>
+          </div>
+          <div class="fixture-time">${fixture.time}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderTeams(query = "") {
+      const filtered = allTeams.filter(([name]) =>
+        name.toLowerCase().includes(query.toLowerCase())
+      );
+
+      teamGrid.innerHTML = filtered.length
+        ? filtered.map(([name, icon]) => `
+          <div class="team-card">
+            <span class="team-emoji">${icon}</span>
+            <span>${name}</span>
+          </div>
+        `).join("")
+        : "<div class='notice'>No team found.</div>";
+    }
+
+    function renderPlayers(query = "") {
+      const filtered = demoPlayers.filter(player =>
+        `${player.name} ${player.club}`.toLowerCase().includes(query.toLowerCase())
+      );
+
+      playerGrid.innerHTML = filtered.length
+        ? filtered.slice(0, 30).map(player => `
+          <div class="player-card">
+            <div class="player-avatar">${player.emoji}</div>
+            <div class="player-name">${player.name}</div>
+            <div class="player-meta">${player.club} · ${player.pos}</div>
+            <div class="player-stat">
+              <span>Goals</span>
+              <strong>${player.goals}</strong>
+            </div>
+            <div class="player-stat">
+              <span>Assists</span>
+              <strong>${player.assists}</strong>
+            </div>
+            <div class="player-stat">
+              <span>Rating</span>
+              <strong>${player.rating}</strong>
+            </div>
+          </div>
+        `).join("")
+        : "<div class='notice'>No player found.</div>";
+    }
+
+    async function loadLiveData() {
+      try {
+        const [standingsRes, teamsRes, fixturesRes] = await Promise.all([
+          fetch(`${API_BASE}/lookuptable.php?l=${LEAGUE_ID}`),
+          fetch(`${API_BASE}/search_all_teams.php?l=Spanish%20La%20Liga`),
+          fetch(`${API_BASE}/eventsnextleague.php?id=${LEAGUE_ID}`)
+        ]);
+
+        const standingsJson = await standingsRes.json();
+        const teamsJson = await teamsRes.json();
+        const fixturesJson = await fixturesRes.json();
+
+        if (standingsJson.table && standingsJson.table.length) {
+          const mapped = standingsJson.table.slice(0, 12).map(team => ({
+            name: team.name || team.strTeam,
+            icon: team.strTeamBadge ? "🏟️" : "⚽",
+            mp: Number(team.played || team.totalplayed || 0),
+            gd: Number(team.goalsdifference || team.goalDifference || 0),
+            pts: Number(team.total || team.points || 0)
+          }));
+          renderStandings(mapped);
+        } else {
+          renderStandings(fallbackStandings);
+        }
+
+        if (teamsJson.teams && teamsJson.teams.length) {
+          allTeams = teamsJson.teams
+            .slice(0, 18)
+            .map(team => [team.strTeam, team.strTeamBadge ? "🏟️" : "⚽"]);
+          renderTeams(teamFilter.value);
+        } else {
+          allTeams = fallbackTeams;
+          renderTeams(teamFilter.value);
+        }
+
+        if (fixturesJson.events && fixturesJson.events.length) {
+          const fixtureData = fixturesJson.events.slice(0, 5).map(match => ({
+            home: match.strHomeTeam || "Home",
+            away: match.strAwayTeam || "Away",
+            date: match.date || "Upcoming",
+            time: match.strTime || "TBD"
+          }));
+          renderFixtures(fixtureData);
+        } else {
+          renderFixtures([
+            { home: "Barcelona", away: "Real Madrid", date: "Saturday", time: "18:00" },
+            { home: "Sevilla", away: "Atlético Madrid", date: "Sunday", time: "16:15" },
+            { home: "Real Sociedad", away: "Valencia", date: "Sunday", time: "20:00" },
+            { home: "Girona", away: "Villarreal", date: "Monday", time: "20:30" }
+          ]);
+        }
+      } catch (error) {
+        console.warn("API failed, using demo data:", error);
+        renderStandings(fallbackStandings);
+        allTeams = fallbackTeams;
+        renderTeams(teamFilter.value);
+        renderFixtures([
+          { home: "Barcelona", away: "Real Madrid", date: "Saturday", time: "18:00" },
+          { home: "Sevilla", away: "Atlético Madrid", date: "Sunday", time: "16:15" },
+          { home: "Real Sociedad", away: "Valencia", date: "Sunday", time: "20:00" },
+          { home: "Girona", away: "Villarreal", date: "Monday", time: "20:30" }
+        ]);
+      }
+    }
+
+    teamFilter.addEventListener("input", (e) => renderTeams(e.target.value));
+    playerSearch.addEventListener("input", (e) => renderPlayers(e.target.value));
+
+    renderStandings(fallbackStandings);
+    renderFixtures([
+      { home: "Barcelona", away: "Real Madrid", date: "Saturday", time: "18:00" },
+      { home: "Sevilla", away: "Atlético Madrid", date: "Sunday", time: "16:15" },
+      { home: "Real Sociedad", away: "Valencia", date: "Sunday", time: "20:00" },
+      { home: "Girona", away: "Villarreal", date: "Monday", time: "20:30" }
+    ]);
+    renderTeams();
+    renderPlayers();
+
+    loadLiveData();
+  </script>
+</body>
+</html>
