@@ -1,0 +1,294 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080d18;
+    color: #eef3ff;
+}
+
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background: #0d1423;
+    padding: 28px 20px;
+    border-right: 1px solid #202c40;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.sidebar h2 {
+    font-size: 21px;
+}
+
+.sidebar h2 span, .welcome span {
+    color: #19d8c0;
+}
+
+.newchat, .primary {
+    background: #12bfae;
+    color: #06131a;
+    border: none;
+    padding: 14px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #a9b6cc;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background: #172b3c;
+    color: #1bd9c1;
+}
+
+.side-title {
+    font-size: 11px;
+    color: #64758f;
+}
+
+.profile {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #172235;
+    border-radius: 10px;
+}
+
+.avatar {
+    background: #14bcae;
+    color: #07131b;
+    padding: 12px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.profile small {
+    display: block;
+    color: #91a0b6;
+    margin-top: 5px;
+}
+
+main {
+    margin-left: 250px;
+    padding: 30px 5%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header p, .section-heading p {
+    color: #94a4ba;
+    margin-top: 8px;
+}
+
+.status {
+    color: #19d8b7;
+    font-size: 12px;
+}
+
+.welcome {
+    margin-top: 40px;
+    padding: 55px;
+    min-height: 310px;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #112b3c, #142044);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tag {
+    color: #1bdac3;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.welcome h1 {
+    font-size: clamp(35px, 5vw, 55px);
+    margin: 18px 0;
+}
+
+.welcome p:not(.tag) {
+    color: #b1c0d5;
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.medical-icon {
+    font-size: 120px;
+    color: #20d9c5;
+    background: #183c50;
+    padding: 35px;
+    border-radius: 50%;
+}
+
+.stats, .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.stat, .card, .chatbox {
+    background: #111b2c;
+    border: 1px solid #26364b;
+    border-radius: 14px;
+    padding: 23px;
+}
+
+.stat h2 {
+    color: #1bdac3;
+    font-size: 30px;
+}
+
+.stat p, .card p {
+    color: #9baec5;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+section {
+    margin-top: 55px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    color: #19d8c0;
+    font-size: 30px;
+}
+
+.card h3 {
+    margin-top: 12px;
+}
+
+.card:hover {
+    border-color: #19d8c0;
+    transform: translateY(-4px);
+    transition: .3s;
+}
+
+.chatbox {
+    padding: 20px;
+}
+
+.messages {
+    height: 260px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.message {
+    padding: 14px;
+    border-radius: 10px;
+    max-width: 85%;
+    line-height: 1.6;
+}
+
+.bot {
+    background: #1a2a40;
+    align-self: flex-start;
+}
+
+.user {
+    background: #087e78;
+    align-self: flex-end;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    background: #080f1d;
+    border: 1px solid #314158;
+    color: white;
+    padding: 15px;
+    border-radius: 9px;
+    outline: none;
+}
+
+.chat-input button {
+    background: #13c5b3;
+    border: none;
+    border-radius: 9px;
+    padding: 0 22px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.chatbox > small {
+    display: block;
+    color: #8495ab;
+    margin-top: 13px;
+}
+
+footer {
+    margin-top: 70px;
+    padding: 35px 0;
+    border-top: 1px solid #26364b;
+    color: #9baec5;
+    line-height: 2;
+}
+
+@media(max-width:850px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .profile {
+        margin-top: 0;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 22px;
+    }
+
+    .stats, .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 30px;
+    }
+
+    .medical-icon {
+        display: none;
+    }
+
+    header {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+}
